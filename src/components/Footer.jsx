@@ -4,7 +4,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function Footer() {
     return ( 
-        <footer className="bg-slate-900 py-16 container px-4 mt-10 flex flex-col items-center">
+        <footer className="bg-slate-900 py-16 px-4 mt-10 flex flex-col items-center">
             <div className="flex justify-center gap-3">
                 <a href="https://github.com/josemcj" title="GitHub" target="_blank" rel="noreferrer">
                     <FontAwesomeIcon
