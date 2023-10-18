@@ -1,6 +1,6 @@
 import Gasto from "./Gasto";
 
-function ListadoGastos({ gastos }) {
+function ListadoGastos({ gastos, eliminarGasto }) {
 
     /**
      * Invierte un arreglo sin mutar el original. Con esto, mostraremos al usuario
@@ -21,6 +21,7 @@ function ListadoGastos({ gastos }) {
                     <Gasto
                         key={ gasto.id }
                         gasto={ gasto }
+                        eliminarGasto={ eliminarGasto }
                     />
                 ))
             ) : (

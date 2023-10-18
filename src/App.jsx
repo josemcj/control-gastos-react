@@ -29,7 +29,16 @@ function App() {
     gasto.id = generarUUIDv4();
     gasto.fecha = Date.now();
 
-    setGastos([ ...gastos, gasto ])
+    setGastos([ ...gastos, gasto ]);
+  }
+
+  /**
+   * Elimina un gasto a partir de su ID.
+   * @param {string} id ID del gasto a eliminar.
+   */
+  const eliminarGasto = id => {
+    const gastosActualizados = gastos.filter(gasto => gasto.id !== id);
+    setGastos(gastosActualizados);
   }
 
   return (
@@ -53,6 +62,7 @@ function App() {
 
             <ListadoGastos
               gastos={ gastos }
+              eliminarGasto={ eliminarGasto }
             />
             <Footer />
           </>
