@@ -4,6 +4,7 @@ import Footer from "./components/Footer"
 import ListadoGastos from "./components/ListadoGastos"
 import Modal from "./components/Modal";
 import { generarUUIDv4 } from "./helpers";
+import DefinirPresupuesto from "./components/DefinirPresupuesto";
 
 function App() {
   const [presupuesto, setPresupuesto] = useState(0);
@@ -34,13 +35,41 @@ function App() {
 
   return (
     <div className={ abrirModal ? 'h-screen overflow-hidden' : '' }>
-      <Header 
-        cantidadDisponible={ cantidadDisponible }
-        setAbrirModal={ setAbrirModal }
-        setTipoModal={ setTipoModal }
-      />
 
-      { abrirModal && <Modal
+      {
+        isValidPresupuesto ? (
+          <>
+            <Header 
+              cantidadDisponible={ cantidadDisponible }
+              setAbrirModal={ setAbrirModal }
+              setTipoModal={ setTipoModal }
+            />
+
+            { abrirModal && <Modal
+              setAbrirModal={ setAbrirModal }
+              tipoModal={ tipoModal }
+              setTipoModal={ setTipoModal }
+              setCantidadDisponible={ setCantidadDisponible }
+              presupuesto={ presupuesto }
+              setPresupuesto={ setPresupuesto }
+              guardarGasto={ guardarGasto }
+            /> }
+
+            <ListadoGastos
+              gastos={ gastos }
+            />
+            <Footer />
+          </>
+        ) : (
+          <DefinirPresupuesto
+            presupuesto={ presupuesto }
+            setPresupuesto={ setPresupuesto }
+            setIsValidPresupuesto={ setIsValidPresupuesto }
+          />
+        )
+      }
+
+      {/* { abrirModal && <Modal
         setAbrirModal={ setAbrirModal }
         tipoModal={ tipoModal }
         setTipoModal={ setTipoModal }
@@ -48,12 +77,8 @@ function App() {
         presupuesto={ presupuesto }
         setPresupuesto={ setPresupuesto }
         guardarGasto={ guardarGasto }
-      /> }
+      /> } */}
 
-      <ListadoGastos
-        gastos={ gastos }
-      />
-      <Footer />
     </div>
   )
 }
