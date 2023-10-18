@@ -2,9 +2,16 @@
 export default {
   content: ["./index.html", "./src/**/*.jsx"],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        xl: '13rem',
+      },
+    },
     extend: {},
     fontFamily: {
-      'sans': ['Inter']
+      'sans': ['Inter', 'sans-serif']
     },
   },
   plugins: [],

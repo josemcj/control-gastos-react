@@ -1,17 +1,29 @@
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { formatearCantidad } from "../helpers";
+import FormModificarCantidad from "./FormModificarCantidad";
+import FormNuevoGasto from "./FormNuevoGasto";
 
-function Modal({ cantidadDisponible, setCantidadDisponible, setAbrirModal }) {
+function Modal({ 
+    setAbrirModal,
+    tipoModal,
+    setTipoModal,
+    cantidadDisponible, 
+    setCantidadDisponible,
+    presupuesto, 
+    setPresupuesto,
+    guardarGasto
+}) {
+    const opcionesModal = { modificar: 'MODIFICAR' }
 
-    const [cantidad, setCantidad] = useState(cantidadDisponible);
+    // TODO: Animar modal al abrir y cerrar.
 
-    const handleSubmit = e => {
-        e.preventDefault();
-
-        console.log(formatearCantidad(cantidadDisponible))
+    /**
+     * Reestablece a 'false' en state 'abrirModal' y 'tipoModal' a un string
+     * vacío.
+     */
+    const handleCerraModal = () => {
         setAbrirModal(false);
+        setTipoModal('');
     }
 
     return ( 
@@ -21,36 +33,29 @@ function Modal({ cantidadDisponible, setCantidadDisponible, setAbrirModal }) {
                 icon={ faXmark }
                 style={ { color: '#0f172a' } }
                 className="p-2 h-5 w-5 md:h-6 md:w-6 bg-slate-100 hover:bg-slate-200 transition-all rounded-full cursor-pointer fixed top-5 right-5 md:top-10 md:right-10"
-                onClick={ () => setAbrirModal(false) }
+                onClick={ () => handleCerraModal() }
             />
 
-            <div className="container mx-auto lg:px-52 flex flex-col md:w-3/5 mt-12">
-                <h1 className="font-black text-3xl sm:text-5xl text-center mb-3">Modificar cantidad</h1>
-                <p className="my-6">Actualmente tienes <span className="font-bold">{ formatearCantidad(cantidad) }</span>.</p>
-
-                <form onSubmit={ handleSubmit }>
-                    <div className="flex flex-col gap-4">
-                        <label htmlFor="cantidad" className="font-bold">Ingresa la nueva cantidad</label>
-
-                        <div className="w-full relative">
-                            <span className="text-slate-500 ml-4 absolute top-1/2 -translate-x-1/2 -translate-y-1/2">$</span>
-                            <input
-                                type="number"
-                                name="cantidad"
-                                id="cantidad"
-                                placeholder="Cantidad"
-                                value={ cantidadDisponible }
-                                onChange={ e => setCantidadDisponible(Number(e.target.value)) }
-                                className="p-2 pl-7 rounded-md border border-slate-300 focus:outline-0 focus:border-slate-600 transition-all w-full"
-                            />
-                        </div>
-                    </div>
-                    <input
-                        type="submit"
-                        className="bg-slate-900 text-white p-2 mt-4 rounded hover:bg-slate-800 cursor-pointer transition-all w-full"
-                        value="Guardar"
+            <div className="container flex flex-col md:w-3/5 mt-12">
+                <h1 className="font-black text-3xl sm:text-5xl text-center mb-3">
+                    { tipoModal === opcionesModal.modificar ? 'Modificar Cantidad' : 'Crear nuevo registro' }
+                </h1>
+                
+                { tipoModal === opcionesModal.modificar ? (
+                    <FormModificarCantidad
+                        setAbrirModal={ setAbrirModal }
+                        setTipoModal={ setTipoModal }
+                        cantidadDisponible={ cantidadDisponible }
+                        presupuesto={ presupuesto }
+                        setPresupuesto={ setPresupuesto }
                     />
-                </form>
+                ) : (
+                    <FormNuevoGasto
+                        guardarGasto={ guardarGasto }
+                        setAbrirModal={ setAbrirModal }
+                    />
+                ) }
+
             </div>
         </div>
      );

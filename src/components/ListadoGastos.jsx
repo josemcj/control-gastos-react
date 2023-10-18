@@ -1,11 +1,21 @@
 import Gasto from "./Gasto";
 
-function ListadoGastos() {
+function ListadoGastos({ gastos }) {
+    
     return ( 
-        <main className="container mx-auto px-4 lg:px-52">
+        <main className="container">
             <h1 className="font-black text-3xl sm:text-4xl mb-10">Listado de ingresos y egresos</h1>
 
-            <Gasto />
+            { gastos.length ? (
+                gastos.map(gasto => (
+                    <Gasto
+                        key={ gasto.id }
+                        gasto={ gasto }
+                    />
+                ))
+            ) : (
+                <p className="font-bold text-slate-500 text-center text-lg my-24">No hay ingresos ni egresos para mostrar.</p>
+            ) }
         </main>
      );
 }
