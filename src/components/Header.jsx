@@ -4,21 +4,23 @@ import { formatearCantidad } from "../helpers/index";
 
 function Header({ 
     cantidadDisponible,
-    setAbrirModal, 
-    setTipoModal 
+    setAbrirModal,
+    setPresupuesto,
+    setGastos,
+    setIsValidPresupuesto
 }) {
-
-    const opcionesModal = { modificar: 'MODIFICAR' }
-
     /**
-     * Abre un modal. La variable "tipo" debe ser la cadena "MODIFICAR" para
-     * modificar la cantidad disponible. Si no se envia dicho argumento de
-     * toma por defecto la creación de un nuevo ingreso/egreso.
-     * @param {string} tipo 'MODIFICAR' o vacío.
+     * Reestablece el presupuesto en 0, los gastos a un areglo vacío y isValidPrespuesto
+     * a false.
      */
-    const handleOnClick = (tipo = '') => {
-        setAbrirModal(true);
-        setTipoModal(tipo);
+    const handleResetApp = () => {
+        const confirmacion = confirm('¿Estás seguro de resetar la aplicación? Todo el contenido será eliminado.');
+
+        if(confirmacion) {
+            setPresupuesto(0);
+            setGastos([]);
+            setIsValidPresupuesto(false);
+        }
     }
 
     return ( 
@@ -30,7 +32,7 @@ function Header({
 
             <div className="flex gap-6 sm:gap-8">
                 <button
-                    onClick={ () => handleOnClick() }
+                    onClick={ () => setAbrirModal(true) }
                     className="py-2 px-3 sm:py-3 sm:px-4 bg-white rounded text-slate-900 font-bold hover:bg-slate-200 transition-all"
                 >
                     Agregar gasto
@@ -38,7 +40,7 @@ function Header({
                 </button>
 
                 <button 
-                    onClick={ () => handleOnClick(opcionesModal.modificar) }
+                    onClick={ () => handleResetApp() }
                     className="py-2 sm:py-3 border-b border-b-white text-white hover:text-slate-200 hover:border-b-slate-200 transition-all"
                 >
                     Restaurar app

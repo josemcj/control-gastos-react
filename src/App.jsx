@@ -11,7 +11,6 @@ function App() {
   const [cantidadDisponible, setCantidadDisponible] = useState(0);
   const [gastos, setGastos] = useState([]);
   const [abrirModal, setAbrirModal] = useState(false);
-  const [tipoModal, setTipoModal] = useState('');
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
 
   useEffect(() => {
@@ -42,16 +41,13 @@ function App() {
             <Header 
               cantidadDisponible={ cantidadDisponible }
               setAbrirModal={ setAbrirModal }
-              setTipoModal={ setTipoModal }
+              setPresupuesto={ setPresupuesto }
+              setGastos={ setGastos }
+              setIsValidPresupuesto={ setIsValidPresupuesto }
             />
 
             { abrirModal && <Modal
               setAbrirModal={ setAbrirModal }
-              tipoModal={ tipoModal }
-              setTipoModal={ setTipoModal }
-              setCantidadDisponible={ setCantidadDisponible }
-              presupuesto={ presupuesto }
-              setPresupuesto={ setPresupuesto }
               guardarGasto={ guardarGasto }
             /> }
 
@@ -68,17 +64,6 @@ function App() {
           />
         )
       }
-
-      {/* { abrirModal && <Modal
-        setAbrirModal={ setAbrirModal }
-        tipoModal={ tipoModal }
-        setTipoModal={ setTipoModal }
-        setCantidadDisponible={ setCantidadDisponible }
-        presupuesto={ presupuesto }
-        setPresupuesto={ setPresupuesto }
-        guardarGasto={ guardarGasto }
-      /> } */}
-
     </div>
   )
 }
