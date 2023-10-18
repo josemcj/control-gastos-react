@@ -1,22 +1,39 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import Alerta from "./Alerta";
 
 function Modal({ 
     setAbrirModal,
+    cantidadDisponible,
     guardarGasto
 }) {
     const [concepto, setConcepto] = useState('');
     const [cantidad, setCantidad] = useState(0);
     const [tipo, setTipo] = useState('');
+    const [error, setError] = useState('');
 
     // TODO: Separar cantidad en el input al escribir.
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        // TODO: Validar que sea los datos sean válidos.
+        if( [concepto, cantidad, tipo].includes('') ) {
+            setError('Todos los campos son obligatorios');
+            return;
+        } 
+        
+        if( !Number(cantidad) || Number(cantidad) <= 0 ) {
+            setError('Ingresa una cantidad válida');
+            return;
+        }
 
+        if( tipo === 'egreso' && cantidad > cantidadDisponible ) {
+            setError('No tienes dinero suficiente para realizar el gasto');
+            return;
+        }
+
+        setError('');
         guardarGasto({ concepto, cantidad, tipo });
         setAbrirModal(false);
     }
@@ -37,6 +54,8 @@ function Modal({
                 <h1 className="font-black text-3xl sm:text-5xl text-center mb-3">
                     Crear nuevo registro
                 </h1>
+
+                { error && <Alerta mensaje={ error } /> }
 
                 <form onSubmit={ handleSubmit } className="my-6">
                     <div className="flex flex-col gap-4 mb-5">

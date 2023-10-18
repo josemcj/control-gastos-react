@@ -43,7 +43,6 @@ function App() {
 
   return (
     <div className={ abrirModal ? 'h-screen overflow-hidden' : '' }>
-
       {
         isValidPresupuesto ? (
           <>
@@ -57,6 +56,7 @@ function App() {
 
             { abrirModal && <Modal
               setAbrirModal={ setAbrirModal }
+              cantidadDisponible={ cantidadDisponible }
               guardarGasto={ guardarGasto }
             /> }
 
