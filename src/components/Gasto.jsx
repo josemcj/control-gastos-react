@@ -4,6 +4,18 @@ function Gasto({ gasto, eliminarGasto }) {
 
     const { id, concepto, cantidad, fecha, tipo } = gasto;
 
+    /**
+     * Primero pide una confirmación antes de eliminar el registro, si es aceptada
+     * llama a la función "elminarGasto".
+     * @param {string} id ID del gasto a eliminar.
+     */
+    const handleEliminarGasto = id => {
+        const confirmacion = confirm('¿Estás seguro de eliminar este registro?');
+        if(confirmacion) {
+            eliminarGasto(id);
+        }
+    }
+
     return ( 
         <div className="bg-white p-6 border grid grid-cols-5 grid-rows-2 my-auto gap-1 mb-5">
             <h2 className="font-black text-xl md:text-3xl col-span-3 self-baseline md:self-center">{ concepto }</h2>
@@ -25,7 +37,7 @@ function Gasto({ gasto, eliminarGasto }) {
                     <button className="py-2 px-3 border border-gray-300 bg-gray-100 hover:bg-gray-300 transition-all rounded">Editar</button>
 
                     <button
-                        onClick={ () => eliminarGasto(id) }
+                        onClick={ () => handleEliminarGasto(id) }
                         className="ml-1 py-2 px-4 bg-red-500 hover:bg-red-400 text-white transition-all rounded"
                     >
                         Eliminar

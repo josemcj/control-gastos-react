@@ -28,7 +28,7 @@ function DefinirPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto
                         type="text"
                         name="presupuesto"
                         placeholder="1000"
-                        className="bg-transparent text-center text-2xl md:text-3xl text-white border-b border-slate-500 py-2 focus:outline-none focus:outline-0 focus:border-white transition-all w-full"
+                        className="bg-transparent text-center text-2xl md:text-3xl text-white border-b border-slate-500 py-2 focus:outline-none focus:outline-0 focus:border-white transition-all w-full rounded-none"
                         onChange={ e => setPresupuesto( Number(e.target.value) ) }
                     />
 
