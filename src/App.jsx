@@ -7,12 +7,27 @@ import DefinirPresupuesto from "./components/DefinirPresupuesto";
 import { generarUUIDv4 } from "./helpers";
 
 function App() {
-  const [presupuesto, setPresupuesto] = useState(0);
+  const [presupuesto, setPresupuesto] = useState(
+    Number(localStorage.getItem('presupuesto')) ?? 0
+  );
+  const [gastos, setGastos] = useState(
+    JSON.parse(localStorage.getItem('gastos')) ?? []
+  );
   const [cantidadDisponible, setCantidadDisponible] = useState(0);
-  const [gastos, setGastos] = useState([]);
   const [abrirModal, setAbrirModal] = useState(false);
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
   const [gastoEditar, setGastoEditar] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem('presupuesto', presupuesto);
+    localStorage.setItem('gastos', JSON.stringify(gastos));
+  }, [presupuesto, gastos])
+
+  useEffect(() => {
+    if(Number(localStorage.getItem('presupuesto'))) {
+      setIsValidPresupuesto(true);
+    }
+  }, []);
 
   useEffect(() => {
     const totalEgresosIngresos = gastos.reduce((total, gasto) => {
