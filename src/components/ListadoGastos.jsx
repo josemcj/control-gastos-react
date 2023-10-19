@@ -1,6 +1,6 @@
 import Gasto from "./Gasto";
 
-function ListadoGastos({ gastos, eliminarGasto }) {
+function ListadoGastos({ gastos, setGastoEditar, eliminarGasto, setAbrirModal }) {
 
     /**
      * Invierte un arreglo sin mutar el original. Con esto, mostraremos al usuario
@@ -21,7 +21,9 @@ function ListadoGastos({ gastos, eliminarGasto }) {
                     <Gasto
                         key={ gasto.id }
                         gasto={ gasto }
+                        setGastoEditar={ setGastoEditar }
                         eliminarGasto={ eliminarGasto }
+                        setAbrirModal={ setAbrirModal }
                     />
                 ))
             ) : (

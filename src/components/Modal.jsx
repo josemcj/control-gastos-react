@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Alerta from "./Alerta";
@@ -6,12 +6,26 @@ import Alerta from "./Alerta";
 function Modal({ 
     setAbrirModal,
     cantidadDisponible,
-    guardarGasto
+    guardarGasto,
+    gastoEditar,
+    setGastoEditar
 }) {
     const [concepto, setConcepto] = useState('');
     const [cantidad, setCantidad] = useState(0);
     const [tipo, setTipo] = useState('');
+    const [id, setId] = useState('');
+    const [fecha, setFecha] = useState(0);
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        if(Object.keys(gastoEditar).length) {
+            setConcepto(gastoEditar.concepto);
+            setCantidad(gastoEditar.cantidad);
+            setTipo(gastoEditar.tipo);
+            setId(gastoEditar.id);
+            setFecha(gastoEditar.fecha);
+        }
+    }, [gastoEditar]);
 
     // TODO: Separar cantidad en el input al escribir.
 
@@ -34,8 +48,16 @@ function Modal({
         }
 
         setError('');
-        guardarGasto({ concepto, cantidad, tipo });
+        guardarGasto({ concepto, cantidad, tipo, id, fecha });
+        setGastoEditar({});
         setAbrirModal(false);
+    }
+
+    const handleCerrarModal = () => {
+        setAbrirModal(false);
+        if(Object.keys(gastoEditar).length) {
+            setGastoEditar({});
+        }
     }
 
     // TODO: Animar modal al abrir y cerrar.
@@ -47,12 +69,12 @@ function Modal({
                 icon={ faXmark }
                 style={ { color: '#0f172a' } }
                 className="p-2 h-5 w-5 md:h-6 md:w-6 bg-slate-100 hover:bg-slate-200 transition-all rounded-full cursor-pointer fixed top-5 right-5 md:top-10 md:right-10"
-                onClick={ () => setAbrirModal(false) }
+                onClick={ () => handleCerrarModal() }
             />
 
             <div className="w-full md:max-w-xl mt-12">
                 <h1 className="font-black text-3xl sm:text-5xl text-center mb-3">
-                    Crear nuevo registro
+                    { Object.keys(gastoEditar).length ? 'Editar registro' : 'Crear nuevo registro' }
                 </h1>
 
                 { error && <Alerta mensaje={ error } /> }

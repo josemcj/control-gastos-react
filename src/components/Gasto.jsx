@@ -1,8 +1,13 @@
 import { formatearCantidad, formatearFecha } from "../helpers";
 
-function Gasto({ gasto, eliminarGasto }) {
+function Gasto({ gasto, setGastoEditar, eliminarGasto, setAbrirModal }) {
 
     const { id, concepto, cantidad, fecha, tipo } = gasto;
+
+    const handleEditarGasto = () => {
+        setGastoEditar(gasto);
+        setAbrirModal(true);
+    }
 
     /**
      * Primero pide una confirmación antes de eliminar el registro, si es aceptada
@@ -34,7 +39,12 @@ function Gasto({ gasto, eliminarGasto }) {
                 </p>
 
                 <div className="col-span-4 sm:col-span-2 place-self-end mt-1">
-                    <button className="py-2 px-3 border border-gray-300 bg-gray-100 hover:bg-gray-300 transition-all rounded">Editar</button>
+                    <button 
+                        onClick={ () => handleEditarGasto() }
+                        className="py-2 px-3 border border-gray-300 bg-gray-100 hover:bg-gray-300 transition-all rounded"
+                    >
+                        Editar
+                    </button>
 
                     <button
                         onClick={ () => handleEliminarGasto(id) }

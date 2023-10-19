@@ -3,8 +3,8 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import ListadoGastos from "./components/ListadoGastos"
 import Modal from "./components/Modal";
-import { generarUUIDv4 } from "./helpers";
 import DefinirPresupuesto from "./components/DefinirPresupuesto";
+import { generarUUIDv4 } from "./helpers";
 
 function App() {
   const [presupuesto, setPresupuesto] = useState(0);
@@ -12,6 +12,7 @@ function App() {
   const [gastos, setGastos] = useState([]);
   const [abrirModal, setAbrirModal] = useState(false);
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
+  const [gastoEditar, setGastoEditar] = useState({});
 
   useEffect(() => {
     const totalEgresosIngresos = gastos.reduce((total, gasto) => {
@@ -26,10 +27,15 @@ function App() {
   }, [gastos, presupuesto]);
 
   const guardarGasto = gasto => {
-    gasto.id = generarUUIDv4();
-    gasto.fecha = Date.now();
-
-    setGastos([ ...gastos, gasto ]);
+    if(!gasto.id) {
+      gasto.id = generarUUIDv4();
+      gasto.fecha = Date.now();
+  
+      setGastos([ ...gastos, gasto ]);
+    } else {
+      const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState);
+      setGastos(gastosActualizados);
+    }
   }
 
   /**
@@ -58,11 +64,15 @@ function App() {
               setAbrirModal={ setAbrirModal }
               cantidadDisponible={ cantidadDisponible }
               guardarGasto={ guardarGasto }
+              gastoEditar={ gastoEditar }
+              setGastoEditar={ setGastoEditar }
             /> }
 
             <ListadoGastos
               gastos={ gastos }
+              setGastoEditar={ setGastoEditar }
               eliminarGasto={ eliminarGasto }
+              setAbrirModal={ setAbrirModal }
             />
             <Footer />
           </>
