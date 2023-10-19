@@ -3,7 +3,7 @@ import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 function Alerta({ mensaje }) {
     return ( 
-        <div className="bg-red-50 border border-red-600 p-2 mt-3 rounded flex justify-center items-center">
+        <div className="bg-red-50 border border-red-600 p-2 my-7 rounded flex justify-center items-center w-full">
             <FontAwesomeIcon 
                 icon={ faCircleExclamation }
                 style={ { color: '#DC2626' } }

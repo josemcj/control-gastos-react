@@ -41,7 +41,7 @@ function Modal({
     // TODO: Animar modal al abrir y cerrar.
 
     return ( 
-        <div className="h-screen bg-white fixed top-0 bottom-0 left-0 right-0 p-8">
+        <div className="h-screen bg-white fixed top-0 bottom-0 left-0 right-0 px-4 py-8 flex flex-col items-center">
 
             <FontAwesomeIcon
                 icon={ faXmark }
@@ -50,7 +50,7 @@ function Modal({
                 onClick={ () => setAbrirModal(false) }
             />
 
-            <div className="container flex flex-col md:w-3/5 mt-12">
+            <div className="w-full md:max-w-xl mt-12">
                 <h1 className="font-black text-3xl sm:text-5xl text-center mb-3">
                     Crear nuevo registro
                 </h1>
@@ -107,7 +107,7 @@ function Modal({
 
                     <input
                         type="submit"
-                        className="bg-slate-900 text-white p-2 mt-4 rounded hover:bg-slate-800 cursor-pointer transition-all w-full"
+                        className="bg-slate-900 text-white p-2 mt-3 rounded hover:bg-slate-800 cursor-pointer transition-all w-full"
                         value="Guardar"
                     />
                 </form>
