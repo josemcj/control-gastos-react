@@ -11,6 +11,18 @@ export const formatearCantidad = cantidad => {
 }
 
 /**
+ * Formatea una cantidad añadiendo separación por miles con coma (,)
+ * y centavos con punto (.).
+ * @param {string} amount Cantidad a formatear.
+ * @returns Cantidad en formato "1,000.00"
+ */
+export const formatearNumero = amount => {
+    return amount.replace(/\D/g, "")
+                    .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                    .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+}
+
+/**
  * Formatea una fecha en milisegundos a un string que el usuario puede entender.
  * @param {number} fechaMilisegundos Fecha en milisegundos obtenida con Date.now().
  * @returns String de la fecha con el formato: '17 oct 2023'.

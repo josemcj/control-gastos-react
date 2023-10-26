@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { formatearNumero } from "../helpers";
 import Alerta from "./Alerta";
 
 function DefinirPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto }) {
+    const [presupuestoStr, setPresupuestoStr] = useState('');
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        const presupuestoNumber = Number( presupuestoStr.replaceAll(',', '') );
+        setPresupuesto(presupuestoNumber);
+    }, [presupuestoStr]);
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -27,9 +34,10 @@ function DefinirPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto
                     <input
                         type="text"
                         name="presupuesto"
-                        placeholder="1000"
+                        placeholder="0.00"
                         className="bg-transparent text-center text-2xl md:text-3xl text-white border-b border-slate-500 py-2 focus:outline-none focus:outline-0 focus:border-white transition-all w-full rounded-none"
-                        onChange={ e => setPresupuesto( Number(e.target.value) ) }
+                        value={ presupuestoStr }
+                        onChange={ e => setPresupuestoStr( formatearNumero(e.target.value) ) }
                     />
 
                     <input 

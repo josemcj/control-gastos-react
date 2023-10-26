@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { formatearNumero } from "../helpers";
 import Alerta from "./Alerta";
 
 function Modal({
@@ -12,6 +13,7 @@ function Modal({
 }) {
     const [concepto, setConcepto] = useState('');
     const [cantidad, setCantidad] = useState(0);
+    const [cantidadStr, setCantidadStr] = useState('');
     const [tipo, setTipo] = useState('');
     const [id, setId] = useState('');
     const [fecha, setFecha] = useState(0);
@@ -21,13 +23,18 @@ function Modal({
         if(Object.keys(gastoEditar).length) {
             setConcepto(gastoEditar.concepto);
             setCantidad(gastoEditar.cantidad);
+            setCantidadStr( formatearNumero(gastoEditar.cantidad.toString()) )
             setTipo(gastoEditar.tipo);
             setId(gastoEditar.id);
             setFecha(gastoEditar.fecha);
         }
     }, [gastoEditar]);
 
-    // TODO: Separar cantidad en el input al escribir.
+    // Asignar la cantidad al state "cantidad" con tipo de dato Number.
+    useEffect(() => {
+        const cantidadSinComas = Number( cantidadStr.replaceAll(',', '') );
+        setCantidad(cantidadSinComas);
+    }, [cantidadStr])
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -53,7 +60,6 @@ function Modal({
     }
 
     return ( 
-        // <div className="h-screen bg-white fixed top-0 bottom-0 left-0 right-0 px-4 py-8 flex flex-col items-center">
         <div className={`h-screen bg-white fixed top-0 bottom-0 left-0 right-0 px-4 py-8 flex flex-col items-center transition-all ease-in-out duration-300 ${animarModal ? 'translate-y-0' : '-translate-y-full'}`}>
 
             <FontAwesomeIcon
@@ -91,12 +97,12 @@ function Modal({
                         <div className="w-full relative">
                             <span className="text-slate-500 ml-4 absolute top-1/2 -translate-x-1/2 -translate-y-1/2">$</span>
                             <input
-                                type="number"
+                                type="text"
                                 name="cantidad"
                                 id="cantidad"
                                 placeholder="Cantidad"
-                                value={ cantidad ? cantidad : '' }
-                                onChange={ e => setCantidad(Number(e.target.value)) }
+                                value={ cantidadStr }
+                                onChange={ e => setCantidadStr( formatearNumero(e.target.value) ) }
                                 className="p-2 pl-7 rounded-md border border-slate-300 focus:outline-0 focus:border-slate-600 transition-all w-full"
                             />
                         </div>

@@ -63,11 +63,19 @@ function App() {
     setGastos(gastosActualizados);
   }
 
+  /**
+   * Abre el modal para crear o editar un registro y añade "true" a la
+   * variable "animarModal".
+   */
   const openModal = () => {
     setAbrirModal(true);
     setTimeout(() => setAnimarModal(true), 0);
   }
 
+  /**
+   * Cierra el modal, añade la animación de cierre y si el objeto
+   * "gastoEditar" tiene información, lo reestablece a un objeto vacío.
+   */
   const closeModal = () => {
     setAnimarModal(false);
     setTimeout(() => setAbrirModal(false), 300);
@@ -91,11 +99,9 @@ function App() {
             />
 
             { abrirModal && <Modal
-              setAbrirModal={ setAbrirModal }
               cantidadDisponible={ cantidadDisponible }
               guardarGasto={ guardarGasto }
               gastoEditar={ gastoEditar }
-              setGastoEditar={ setGastoEditar }
               animarModal={ animarModal }
               closeModal={ closeModal }
             /> }
