@@ -4,10 +4,10 @@ import { formatearCantidad } from "../helpers/index";
 
 function Header({ 
     cantidadDisponible,
-    setAbrirModal,
+    openModal,
     setPresupuesto,
     setGastos,
-    setIsValidPresupuesto
+    setIsValidPresupuesto,
 }) {
     /**
      * Reestablece el presupuesto en 0, los gastos a un areglo vacío y isValidPrespuesto
@@ -40,7 +40,7 @@ function Header({
                 </button>
 
                 <button
-                    onClick={ () => setAbrirModal(true) }
+                    onClick={ () => openModal() }
                     className="py-2 px-3 sm:py-3 sm:px-4 bg-white rounded text-slate-900 font-bold hover:bg-slate-200 transition-all"
                 >
                     Agregar gasto

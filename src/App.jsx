@@ -15,6 +15,7 @@ function App() {
   );
   const [cantidadDisponible, setCantidadDisponible] = useState(0);
   const [abrirModal, setAbrirModal] = useState(false);
+  const [animarModal, setAnimarModal] = useState(false);
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
   const [gastoEditar, setGastoEditar] = useState({});
 
@@ -62,14 +63,28 @@ function App() {
     setGastos(gastosActualizados);
   }
 
+  const openModal = () => {
+    setAbrirModal(true);
+    setTimeout(() => setAnimarModal(true), 0);
+  }
+
+  const closeModal = () => {
+    setAnimarModal(false);
+    setTimeout(() => setAbrirModal(false), 300);
+
+    if(Object.keys(gastoEditar).length) {
+      setTimeout(() => setGastoEditar({}), 300);
+    }
+  }
+
   return (
-    <div className={ abrirModal ? 'h-screen overflow-hidden' : '' }>
+    <>
       {
         isValidPresupuesto ? (
-          <>
+          <div className={ abrirModal ? 'h-screen overflow-hidden' : '' }>
             <Header 
               cantidadDisponible={ cantidadDisponible }
-              setAbrirModal={ setAbrirModal }
+              openModal={ openModal }
               setPresupuesto={ setPresupuesto }
               setGastos={ setGastos }
               setIsValidPresupuesto={ setIsValidPresupuesto }
@@ -81,16 +96,18 @@ function App() {
               guardarGasto={ guardarGasto }
               gastoEditar={ gastoEditar }
               setGastoEditar={ setGastoEditar }
+              animarModal={ animarModal }
+              closeModal={ closeModal }
             /> }
 
             <ListadoGastos
               gastos={ gastos }
               setGastoEditar={ setGastoEditar }
               eliminarGasto={ eliminarGasto }
-              setAbrirModal={ setAbrirModal }
+              openModal={ openModal }
             />
             <Footer />
-          </>
+          </div>
         ) : (
           <DefinirPresupuesto
             presupuesto={ presupuesto }
@@ -99,7 +116,7 @@ function App() {
           />
         )
       }
-    </div>
+      </>
   )
 }
 

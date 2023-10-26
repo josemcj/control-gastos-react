@@ -1,12 +1,12 @@
 import { formatearCantidad, formatearFecha } from "../helpers";
 
-function Gasto({ gasto, setGastoEditar, eliminarGasto, setAbrirModal }) {
+function Gasto({ gasto, setGastoEditar, eliminarGasto, openModal }) {
 
     const { id, concepto, cantidad, fecha, tipo } = gasto;
 
     const handleEditarGasto = () => {
         setGastoEditar(gasto);
-        setAbrirModal(true);
+        openModal();
     }
 
     /**

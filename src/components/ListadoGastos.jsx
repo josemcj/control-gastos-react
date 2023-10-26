@@ -1,6 +1,6 @@
 import Gasto from "./Gasto";
 
-function ListadoGastos({ gastos, setGastoEditar, eliminarGasto, setAbrirModal }) {
+function ListadoGastos({ gastos, setGastoEditar, eliminarGasto, openModal }) {
 
     /**
      * Invierte un arreglo sin mutar el original. Con esto, mostraremos al usuario
@@ -23,7 +23,7 @@ function ListadoGastos({ gastos, setGastoEditar, eliminarGasto, setAbrirModal })
                         gasto={ gasto }
                         setGastoEditar={ setGastoEditar }
                         eliminarGasto={ eliminarGasto }
-                        setAbrirModal={ setAbrirModal }
+                        openModal={ openModal }
                     />
                 ))
             ) : (
