@@ -19,7 +19,7 @@ export const formatearCantidad = cantidad => {
 export const formatearNumero = amountInput => {
     const amount = amountInput.replace(/[^0-9]/g, '');
     const decimales = amount.slice(-2).length === 1 ? `0${amount.slice(-2)}` : amount.slice(-2);
-    const cantidad = amount.slice(0, -2) || '0';
+    const cantidad = amount.slice(0, -2);
     let cantidadInt = '';
     let partes = [];
     let valorActual = '';
