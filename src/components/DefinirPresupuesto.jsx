@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { formatearNumero } from "../helpers";
 import Alerta from "./Alerta";
 
-function DefinirPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto }) {
+function DefinirPresupuesto({ setPresupuesto, setIsValidPresupuesto }) {
     const [presupuestoStr, setPresupuestoStr] = useState('');
     const [error, setError] = useState('');
 
@@ -10,14 +10,14 @@ function DefinirPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto
         e.preventDefault()
 
         const presupuestoNumber = Number( presupuestoStr.replaceAll(',', '') );
-        setPresupuesto(presupuestoNumber);
-
-        if( !presupuesto || presupuesto < 0 ) {
+        
+        if( !presupuestoNumber || presupuestoNumber < 0 ) {
             setError('Ingresa un presupuesto válido');
             return;
         }
-
+        
         setError('');
+        setPresupuesto(presupuestoNumber);
         setIsValidPresupuesto(true);
     }
 

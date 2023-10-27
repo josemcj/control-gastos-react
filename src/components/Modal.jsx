@@ -100,7 +100,7 @@ function Modal({
                                 type="text"
                                 name="cantidad"
                                 id="cantidad"
-                                placeholder="Cantidad"
+                                placeholder="0.00"
                                 value={ cantidadStr }
                                 onChange={ e => setCantidadStr( formatearNumero(e.target.value) ) }
                                 className="p-2 pl-7 rounded-md border border-slate-300 focus:outline-0 focus:border-slate-600 transition-all w-full"

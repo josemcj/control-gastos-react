@@ -17,9 +17,9 @@ export const formatearCantidad = cantidad => {
  * @returns Cantidad en formato "1,000.00"
  */
 export const formatearNumero = amountInput => {
-    const amount = amountInput.replaceAll(',', '').replaceAll('.', '');
+    const amount = amountInput.replaceAll(',', '').replaceAll('.', '').replace(/[^0-9]/g, '');
     const decimales = amount.slice(-2).length === 1 ? `0${amount.slice(-2)}` : amount.slice(-2);
-    const cantidad = amount.slice(0, -2);
+    const cantidad = amount.slice(0, -2) || '0';
     let cantidadInt = '';
     let partes = [];
     let valorActual = '';
@@ -32,9 +32,9 @@ export const formatearNumero = amountInput => {
         }
     }
 
-    cantidadInt = partes.join(',').replace(/^(0,|0,|0)+/, '');
+    cantidadInt = partes.join(',').replace(/^(0,|,|0|00)+/, '');
 
-    return `${ cantidadInt }.${ decimales }`;
+    return `${ cantidadInt.length ? cantidadInt : '0' }.${ decimales }`;
 }
 
 /**

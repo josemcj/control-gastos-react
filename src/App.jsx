@@ -117,7 +117,6 @@ function App() {
           </div>
         ) : (
           <DefinirPresupuesto
-            presupuesto={ presupuesto }
             setPresupuesto={ setPresupuesto }
             setIsValidPresupuesto={ setIsValidPresupuesto }
           />
