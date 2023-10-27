@@ -14,6 +14,7 @@ function Modal({
     const [concepto, setConcepto] = useState('');
     const [cantidad, setCantidad] = useState(0);
     const [cantidadStr, setCantidadStr] = useState('');
+    const [disponibleAux, setDisponibleAux] = useState(cantidadDisponible);
     const [tipo, setTipo] = useState('');
     const [id, setId] = useState('');
     const [fecha, setFecha] = useState(0);
@@ -27,8 +28,14 @@ function Modal({
             setTipo(gastoEditar.tipo);
             setId(gastoEditar.id);
             setFecha(gastoEditar.fecha);
+
+            if(gastoEditar.tipo === 'egreso') {
+                setDisponibleAux( cantidadDisponible + gastoEditar.cantidad )
+            } else {
+                setDisponibleAux( cantidadDisponible - gastoEditar.cantidad )
+            }
         }
-    }, [gastoEditar]);
+    }, [gastoEditar, cantidadDisponible]);
 
     // Asignar la cantidad al state "cantidad" con tipo de dato Number.
     useEffect(() => {
@@ -49,7 +56,7 @@ function Modal({
             return;
         }
 
-        if( tipo === 'egreso' && cantidad > cantidadDisponible ) {
+        if( tipo === 'egreso' && (id && cantidad > disponibleAux || !id && cantidad > cantidadDisponible) ) {
             setError('No tienes dinero suficiente para realizar el gasto');
             return;
         }
