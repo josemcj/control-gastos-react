@@ -23,7 +23,7 @@ function Modal({
         if(Object.keys(gastoEditar).length) {
             setConcepto(gastoEditar.concepto);
             setCantidad(gastoEditar.cantidad);
-            setCantidadStr( formatearNumero(gastoEditar.cantidad.toString()) )
+            setCantidadStr( formatearNumero(gastoEditar.cantidad.toFixed(2)) )
             setTipo(gastoEditar.tipo);
             setId(gastoEditar.id);
             setFecha(gastoEditar.fecha);

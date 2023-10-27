@@ -7,6 +7,7 @@ import DefinirPresupuesto from "./components/DefinirPresupuesto";
 import { generarUUIDv4 } from "./helpers";
 
 function App() {
+
   const [presupuesto, setPresupuesto] = useState(
     Number(localStorage.getItem('presupuesto')) ?? 0
   );
@@ -22,10 +23,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem('presupuesto', presupuesto);
     localStorage.setItem('gastos', JSON.stringify(gastos));
-  }, [presupuesto, gastos])
+  }, [presupuesto, gastos]);
 
   useEffect(() => {
-    if(Number(localStorage.getItem('presupuesto'))) {
+    if( Number(localStorage.getItem('presupuesto')) ) {
+      setPresupuesto(Number(localStorage.getItem('presupuesto')));
       setIsValidPresupuesto(true);
     }
   }, []);
