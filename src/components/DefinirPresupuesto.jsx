@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { formatearNumero } from "../helpers";
 import Alerta from "./Alerta";
 
