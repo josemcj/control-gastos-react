@@ -6,13 +6,11 @@ function DefinirPresupuesto({ presupuesto, setPresupuesto, setIsValidPresupuesto
     const [presupuestoStr, setPresupuestoStr] = useState('');
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const presupuestoNumber = Number( presupuestoStr.replaceAll(',', '') );
-        setPresupuesto(presupuestoNumber);
-    }, [presupuestoStr]);
-
     const handleSubmit = e => {
         e.preventDefault()
+
+        const presupuestoNumber = Number( presupuestoStr.replaceAll(',', '') );
+        setPresupuesto(presupuestoNumber);
 
         if( !presupuesto || presupuesto < 0 ) {
             setError('Ingresa un presupuesto válido');

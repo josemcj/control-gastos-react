@@ -33,7 +33,7 @@ export const formatearNumero = amountInput => {
     }
 
     cantidadInt = partes.join(',').replace(/^(0,|0,|0)+/, '');
-    
+
     return `${ cantidadInt }.${ decimales }`;
 }
 

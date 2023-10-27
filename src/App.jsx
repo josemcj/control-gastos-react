@@ -27,7 +27,6 @@ function App() {
 
   useEffect(() => {
     if( Number(localStorage.getItem('presupuesto')) ) {
-      setPresupuesto(Number(localStorage.getItem('presupuesto')));
       setIsValidPresupuesto(true);
     }
   }, []);
