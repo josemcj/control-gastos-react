@@ -6,7 +6,7 @@ function Footer() {
     return ( 
         <footer className="bg-slate-900 py-16 px-4 mt-10 flex flex-col items-center">
             <div className="flex justify-center gap-3">
-                <a href="https://github.com/josemcj" title="GitHub" target="_blank" rel="noreferrer">
+                <a href="https://github.com/josemcj/control-gastos-react/" title="GitHub" target="_blank" rel="noreferrer">
                     <FontAwesomeIcon
                         icon={ faGithub }
                         style={ { color: '#0f172a' } }
